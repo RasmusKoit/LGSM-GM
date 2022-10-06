@@ -1,0 +1,40 @@
+version: '3.4'
+services:
+  linuxgsm-installer:
+    image: "ghcr.io/gameservermanagers/linuxgsm-docker:latest"
+    container_name: csgoserver
+    environment:
+      - GAMESERVER=csgoserver
+      - LGSM_GITHUBUSER=GameServerManagers
+      - LGSM_GITHUBREPO=LinuxGSM
+      - LGSM_GITHUBBRANCH=master
+    volumes:
+      - /home/docker/linuxgsm/csgoserver/serverfiles:/home/linuxgsm/serverfiles
+      - /home/docker/linuxgsm/csgoserver/log:/home/linuxgsm/log
+      - /home/docker/linuxgsm/csgoserver/config-lgsm:/home/linuxgsm/lgsm/config-lgsm
+    ports:
+      - "27001:27001/tcp"
+      - "27001:27001/udp"
+      - "27101:27101/udp"
+      - "27201:27201/udp"
+    restart: unless-stopped
+  linuxgsm2:
+    image: "ghcr.io/gameservermanagers/linuxgsm-docker:latest"
+    container_name: csgoserver
+    environment:
+      - GAMESERVER=csgoserver
+      - LGSM_GITHUBUSER=GameServerManagers
+      - LGSM_GITHUBREPO=LinuxGSM
+      - LGSM_GITHUBBRANCH=master
+    volumes:
+      - /home/docker/linuxgsm/csgoserver/serverfiles:/home/linuxgsm/serverfiles
+      - /home/docker/linuxgsm/csgoserver/log:/home/linuxgsm/log
+      - /home/docker/linuxgsm/csgoserver/config-lgsm:/home/linuxgsm/lgsm/config-lgsm
+    ports:
+      - "27001:27001/tcp"
+      - "27001:27001/udp"
+      - "27101:27101/udp"
+      - "27201:27201/udp"
+    restart: unless-stopped
+  admin-panel:
+    image: linux
