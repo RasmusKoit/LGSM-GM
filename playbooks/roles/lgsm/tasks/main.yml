@@ -1,0 +1,5 @@
+---
+# - include_tasks: linux_dependencies.yml
+# - include_tasks: linux_configuration.yml
+# - include_tasks: lgsm_install.yml
+- include_tasks: lgsm_configuration.yml

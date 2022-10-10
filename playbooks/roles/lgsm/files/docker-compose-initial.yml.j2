@@ -1,0 +1,20 @@
+version: '3.4'
+services:
+    linuxgsm:
+        image: "raks321/linuxgsm-docker:latest"
+        container_name: csgoserver-files
+        environment:
+            - GAMESERVER=csgoserver
+            - LGSM_GITHUBUSER=GameServerManagers
+            - LGSM_GITHUBREPO=LinuxGSM
+            - LGSM_GITHUBBRANCH=master
+        volumes:
+            - /home/csgoserver/server/serverfiles:/home/linuxgsm/serverfiles
+            - /home/csgoserver/server/log:/home/linuxgsm/log
+            - /home/csgoserver/server/config-lgsm:/home/linuxgsm/lgsm/config-lgsm
+        ports:
+            - "27015:27015/tcp"
+            - "27015:27015/udp"
+            - "27020:27020/udp"
+            - "27005:27005/udp"
+        restart: unless-stopped

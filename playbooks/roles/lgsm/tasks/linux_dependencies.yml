@@ -1,0 +1,63 @@
+- name: Check if i386 is enabled
+  shell: dpkg --print-foreign-architectures | grep i386
+  register: result_i386_check
+  changed_when: result_i386_check.rc == 1
+  failed_when: result_i386_check.rc > 1
+  when: packaging_enable_i386
+
+- name: Enable i386 architecture
+  command: dpkg --add-architecture i386
+  when: packaging_enable_i386 and result_i386_check.rc == 1
+
+- name: Update all packages
+  apt: force_apt_get=yes
+
+- name: Install LGSM Debian 11 or above dependencies
+  apt:
+    pkg:
+      - bc
+      - binutils
+      - bsdmainutils
+      - bzip2
+      - ca-certificates
+      - cpio
+      - curl
+      - distro-info
+      - file
+      - gzip
+      - hostname
+      - jq
+      - lib32gcc-s1
+      - lib32stdc++6
+      - libsdl2-2.0-0:i386
+      - netcat
+      - python3
+      - tar
+      - tmux
+      - unzip
+      - util-linux
+      - wget
+      - xz-utils
+    state: latest
+    update_cache: true
+  become: true
+
+- name: Create user to manage csgoserver
+  ansible.builtin.user:
+    name: csgouser
+    comment: Counter Strike Server User
+    shell: /bin/bash
+    groups: sudo
+    append: yes
+    generate_ssh_key: yes
+    ssh_key_bits: 4096
+    ssh_key_file: .ssh/id_rsa
+    state: present
+  become: true
+
+- name: Make sure rasmus can interact with other users
+  user:
+    name: rasmus
+    groups: sudo,csgouser,csgoserver
+    append: yes
+  become: true

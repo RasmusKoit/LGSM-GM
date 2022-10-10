@@ -17,22 +17,6 @@ Automatically generate X number of servers and manage them.
 
 #### First run
 
-First install the base CSGO server files
-
-```bash
-apt install python3 git -y
-adduser csgoserver
-su - csgoserver
-wget -O linuxgsm.sh https://linuxgsm.sh && chmod +x linuxgsm.sh && bash linuxgsm.sh csgoserver
-mv csgoserver csgoserver-base
-./csgoserver-base install
-```
-
-After the base installation has finished generate X number of config files
-
-```bash
-python3 generate-configs.py
-```
 
 #### Managing server
 

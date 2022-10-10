@@ -1,0 +1,50 @@
+- name: Copy docker-compose file
+  copy:
+    src: files/docker-compose-initial.yml.j2
+    dest: /home/csgoserver/server/docker-compose-initial.yml
+    owner: csgoserver
+    group: csgoserver
+  become: true
+
+- name: Tear down existing services
+  docker_compose:
+    project_src: /home/csgoserver/server
+    files: docker-compose-initial.yml
+    state: absent
+  become: true
+
+- name: Check if initial csgo server files need to be installed
+  stat:
+    path: /home/csgoserver/server/log/script/csgoserver-steamcmd.log
+  register: csgo_initial_install
+  become: true
+
+- name: Report if files are installed
+  debug:
+    msg: "CSGO Initial Server files have been installed"
+  when: csgo_initial_install.stat.exists
+
+- name: Install initial files
+  docker_compose:
+    project_src: /home/csgoserver/server
+    files: docker-compose-initial.yml
+  become: true
+  when: not csgo_initial_install.stat.exists
+
+- name: Wait until service has installed (1h timeout with 60s intervals)
+  wait_for:
+    path: /home/csgoserver/server/log/script/csgoserver-steamcmd.log
+    search_regex: "Success! App '740' already up to date."
+    delay: 30
+    sleep: 60
+    timeout: 3600
+  become: true
+  when: not csgo_initial_install.stat.exists
+
+- name: Tear down existing services
+  docker_compose:
+    project_src: /home/csgoserver/server
+    files: docker-compose-initial.yml
+    state: absent
+  become: true
+  when: not csgo_initial_install.stat.exists
