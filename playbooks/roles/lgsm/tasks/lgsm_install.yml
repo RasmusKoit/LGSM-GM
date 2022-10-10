@@ -1,6 +1,6 @@
 - name: Copy docker-compose file
   copy:
-    src: files/docker-compose-initial.yml.j2
+    src: templates/docker-compose-initial.yml.j2
     dest: /home/csgoserver/server/docker-compose-initial.yml
     owner: csgoserver
     group: csgoserver

@@ -1,6 +1,6 @@
 - name: Create docker-compose file for cs go servers
   template:
-    src: files/docker-compose-servers.yml.j2
+    src: templates/docker-compose-servers.yml.j2
     dest: /home/csgoserver/server/docker-compose-servers.yml
     owner: csgoserver
     group: csgoserver
