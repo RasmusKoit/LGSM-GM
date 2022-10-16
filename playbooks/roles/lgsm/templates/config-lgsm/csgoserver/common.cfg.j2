@@ -1,0 +1,28 @@
+##################################
+######## Common Settings #########
+##################################
+# PLACE GLOBAL SETTINGS HERE
+## These settings will apply to all instances.
+#### Game Server Settings ####
+
+## Predefined Parameters | https://docs.linuxgsm.com/configuration/start-parameters
+# https://docs.linuxgsm.com/game-servers/counter-strike-global-offensive
+# [Game Modes]                  gametype                gamemode                mapgroup (you can mix these across all Game Modes except Danger Zone, but use only one)
+# Arms Race                     1                       0                       mg_armsrace
+# Classic Casual                0                       0                       mg_casualsigma, mg_casualdelta
+# Classic Competitive           0                       1                       mg_active, mg_reserves, mg_hostage, mg_de_dust2
+# Custom                        3                       0
+# Deathmatch                    1                       2                       mg_deathmatch
+# Demolition                    1                       1                       mg_demolition
+# Wingman                       0                       2
+# Danger Zone                   6                       0                       mg_dz_blacksite (map: dz_blacksite), mg_dz_sirocco (map: dz_sirocco)
+gametype="0"
+gamemode="1"
+mapgroup="mg_active"
+ip="0.0.0.0"
+maxplayers="12"
+tickrate="128"
+
+# Discord Alerts | https://docs.linuxgsm.com/alerts/discord
+discordalert="off"
+discordwebhook="webhook"

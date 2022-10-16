@@ -13,6 +13,12 @@
     state: absent
   become: true
 
+- name: pull latest linuxgsm-docker image
+  docker_image:
+    name: raks321/linuxgsm-docker
+    tag: latest
+  become: true
+
 - name: Run CSGO servers
   docker_compose:
     project_src: /home/csgoserver/server

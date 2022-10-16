@@ -14,7 +14,6 @@ services:
             - /home/csgoserver/server/serverfiles:/home/linuxgsm/serverfiles
             - /home/csgoserver/server/log:/home/linuxgsm/log
             - /home/csgoserver/server/config-lgsm:/home/linuxgsm/lgsm/config-lgsm
-            - /home/csgoserver/server/csgoserver:/home/linuxgsm
         ports:
             - "270{{ '%02d' % index }}:270{{ '%02d' % index }}/tcp"
             - "270{{ '%02d' % index }}:270{{ '%02d' % index }}/udp"
