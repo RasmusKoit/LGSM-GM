@@ -16,6 +16,7 @@
 - name: pull latest linuxgsm-docker image
   docker_image:
     name: raks321/linuxgsm-docker
+    source: pull
     tag: latest
   become: true
 
