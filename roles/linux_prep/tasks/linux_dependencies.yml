@@ -1,3 +1,6 @@
+- include_vars: debian.yml
+  when: ansible_os_family == "Debian"
+
 - name: Check if i386 is enabled
   shell: dpkg --print-foreign-architectures | grep i386
   register: result_i386_check
@@ -14,32 +17,10 @@
 
 - name: Install LGSM Debian 11 or above dependencies
   apt:
-    pkg:
-      - bc
-      - binutils
-      - bsdmainutils
-      - bzip2
-      - ca-certificates
-      - cpio
-      - curl
-      - distro-info
-      - file
-      - gzip
-      - hostname
-      - jq
-      - lib32gcc-s1
-      - lib32stdc++6
-      - libsdl2-2.0-0:i386
-      - netcat
-      - python3
-      - tar
-      - tmux
-      - unzip
-      - util-linux
-      - wget
-      - xz-utils
+    name: '{{ item }}'
     state: latest
-    update_cache: true
+  with_items: '{{ debian_packages }}'
+  when: ansible_distribution_major_version|int >= 11
   become: true
 
 - name: Create user to manage csgoserver

@@ -1,0 +1,9 @@
+---
+- include_tasks: linux_configuration.yml
+  tags: 
+    - linux_configuration
+    - linux_prep
+- include_tasks: linux_dependencies.yml
+  tags: 
+    - linux_dependencies
+    - linux_prep
