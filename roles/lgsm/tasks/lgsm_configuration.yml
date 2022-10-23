@@ -24,5 +24,6 @@
   docker_compose:
     project_src: /home/csgoserver/server
     files: docker-compose-servers.yml
+    remove_orphans: yes
   become: true
 

@@ -37,10 +37,10 @@
   become: true
   when: not csgo_initial_install.stat.exists
 
-- name: Wait until service has installed (1h timeout with 60s intervals)
+- name: Wait until service has installed or updated (1h timeout with 60s intervals)
   wait_for:
     path: /home/csgoserver/server/log/script/csgoserver-steamcmd.log
-    search_regex: "Success! App '740' already up to date."
+    search_regex: "Success! App '740' already up to date. | Success! App '740' fully installed."
     delay: 30
     sleep: 60
     timeout: 3600
