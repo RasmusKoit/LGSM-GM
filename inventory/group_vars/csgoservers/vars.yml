@@ -1,0 +1,3 @@
+csgo_user_name: csgoserver
+csgo_user_path: "/home/{{ csgo_user_name }}/"
+csgo_server_path: "{{ csgo_user_path }}server"

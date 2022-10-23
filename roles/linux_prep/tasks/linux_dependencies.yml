@@ -23,7 +23,7 @@
   when: ansible_distribution_major_version|int >= 11
   become: true
 
-- name: Create user to manage csgoserver
+- name: Create user to manage {{ csgo_user_name }}
   ansible.builtin.user:
     name: csgouser
     comment: Counter Strike Server User
@@ -39,6 +39,6 @@
 - name: Make sure rasmus can interact with other users
   user:
     name: rasmus
-    groups: sudo,csgouser,csgoserver
+    groups: sudo,csgouser,{{ csgo_user_name }}
     append: yes
   become: true

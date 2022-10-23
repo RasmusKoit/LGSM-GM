@@ -1,14 +1,14 @@
 - name: Create docker-compose file for cs go servers
   template:
     src: templates/docker-compose-servers.yml.j2
-    dest: /home/csgoserver/server/docker-compose-servers.yml
-    owner: csgoserver
-    group: csgoserver
+    dest: {{ csgo_server_path }}/docker-compose-servers.yml
+    owner: {{ csgo_user_name }}
+    group: {{ csgo_user_name }}
   become: true
 
 - name: Tear down existing services
   docker_compose:
-    project_src: /home/csgoserver/server
+    project_src: {{ csgo_server_path }}
     files: docker-compose-servers.yml
     state: absent
   become: true
@@ -22,7 +22,7 @@
 
 - name: Run CSGO servers
   docker_compose:
-    project_src: /home/csgoserver/server
+    project_src: {{ csgo_server_path }}
     files: docker-compose-servers.yml
     remove_orphans: yes
   become: true

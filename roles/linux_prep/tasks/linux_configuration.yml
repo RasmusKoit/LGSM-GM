@@ -13,7 +13,7 @@
 
 - name: mount new volumes and create fstab entries
   ansible.posix.mount:
-    path: "/home/csgoserver/server"
+    path: "{{ csgo_server_path }}"
     src: UUID={{ csgo_part_info.stdout }}
     state: mounted
     fstype: ext4
