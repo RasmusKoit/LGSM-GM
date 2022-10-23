@@ -4,11 +4,11 @@
     number: 1
     state: present
     fs_type: ext4
-  become: true
+  
 
 - name: Get partition UUID
   command: blkid -s UUID -o value /dev/sdb1 # TODO: change to variable
-  become: true
+  
   register: csgo_part_info
 
 - name: mount new volumes and create fstab entries
@@ -18,4 +18,4 @@
     state: mounted
     fstype: ext4
     opts: defaults,nofail
-  become: true
+  

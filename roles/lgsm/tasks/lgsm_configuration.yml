@@ -4,26 +4,26 @@
     dest: {{ csgo_server_path }}/docker-compose-servers.yml
     owner: {{ csgo_user_name }}
     group: {{ csgo_user_name }}
-  become: true
+  
 
 - name: Tear down existing services
   docker_compose:
     project_src: {{ csgo_server_path }}
     files: docker-compose-servers.yml
     state: absent
-  become: true
+  
 
 - name: pull latest linuxgsm-docker image
   docker_image:
     name: raks321/linuxgsm-docker
     source: pull
     tag: latest
-  become: true
+  
 
 - name: Run CSGO servers
   docker_compose:
     project_src: {{ csgo_server_path }}
     files: docker-compose-servers.yml
     remove_orphans: yes
-  become: true
+  
 

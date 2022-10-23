@@ -4,26 +4,26 @@
     dest: {{ csgo_server_path }}/docker-compose-initial.yml
     owner: {{ csgo_user_name }}
     group: {{ csgo_user_name }}
-  become: true
+  
 
 - name: Tear down existing services
   docker_compose:
     project_src: {{ csgo_server_path }}
     files: docker-compose-initial.yml
     state: absent
-  become: true
+  
 
 - name: Pull latest raks321/linuxgsm-docker image
   docker_image:
     name: raks321/linuxgsm-docker
     source: pull
-  become: true
+  
 
 - name: Check if initial csgo server files need to be installed
   stat:
     path: {{ csgo_server_path }}/log/script/csgoserver-steamcmd.log
   register: csgo_initial_install
-  become: true
+  
 
 - name: Report if files are installed
   debug:
@@ -34,7 +34,6 @@
   docker_compose:
     project_src: {{ csgo_server_path }}
     files: docker-compose-initial.yml
-  become: true
   when: not csgo_initial_install.stat.exists
 
 - name: Wait until service has installed or updated (1h timeout with 60s intervals)
@@ -44,7 +43,6 @@
     delay: 30
     sleep: 60
     timeout: 3600
-  become: true
   when: not csgo_initial_install.stat.exists
 
 - name: Tear down existing services
@@ -52,5 +50,4 @@
     project_src: {{ csgo_server_path }}
     files: docker-compose-initial.yml
     state: absent
-  become: true
   when: not csgo_initial_install.stat.exists

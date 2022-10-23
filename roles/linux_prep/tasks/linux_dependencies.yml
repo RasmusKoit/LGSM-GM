@@ -21,7 +21,7 @@
     state: latest
   with_items: '{{ debian_packages }}'
   when: ansible_distribution_major_version|int >= 11
-  become: true
+  
 
 - name: Create user to manage {{ csgo_user_name }}
   ansible.builtin.user:
@@ -34,11 +34,11 @@
     ssh_key_bits: 4096
     ssh_key_file: .ssh/id_rsa
     state: present
-  become: true
+  
 
 - name: Make sure rasmus can interact with other users
   user:
     name: rasmus
     groups: sudo,csgouser,{{ csgo_user_name }}
     append: yes
-  become: true
+  
