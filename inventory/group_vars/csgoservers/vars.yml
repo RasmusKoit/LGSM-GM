@@ -1,3 +1,8 @@
 csgo_user_name: csgoserver
 csgo_user_path: "/home/{{ csgo_user_name }}/"
 csgo_server_path: "{{ csgo_user_path }}server"
+
+# Tournament related information
+tournament_server_name: "tournament"
+tournament_server_count: 8
+tournament_server_admins: ["76561197987286508"]
