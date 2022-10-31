@@ -4,7 +4,7 @@
     dest: "{{ csgo_server_path }}/docker-compose-initial.yml"
     owner: "{{ csgo_user_name }}"
     group: "{{ csgo_user_name }}"
-
+  become: true
 
 - name: Tear down existing services
   docker_compose:

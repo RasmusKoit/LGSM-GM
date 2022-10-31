@@ -4,7 +4,7 @@
     dest: "{{ csgo_server_path }}/docker-compose-servers.yml"
     owner: "{{ csgo_user_name }}"
     group: "{{ csgo_user_name }}"
-  
+  become: true
 
 - name: Tear down existing services
   docker_compose:
@@ -24,6 +24,7 @@
     src: templates/config-lgsm/csgoserver/csgoserver.cfg.j2
     dest: "{{ csgo_server_path }}/config-lgsm/csgoserver/csgoserver{{ '%02d' % item }}.cfg"
   loop: "{{ range(1, {{ tournament_server_count }} + 1) }}"
+  become: true
 
 - name: Run CSGO servers
   docker_compose:
