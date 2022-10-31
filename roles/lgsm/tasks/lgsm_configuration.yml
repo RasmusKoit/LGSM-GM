@@ -12,7 +12,6 @@
     files: docker-compose-servers.yml
     state: absent
   become: true
-  
 
 - name: pull latest linuxgsm-docker image
   docker_image:
@@ -20,6 +19,7 @@
     source: pull
     tag: latest
   become: true
+
 
 - name: Copy over config-lgsm csgo config files with template
   template:

@@ -6,14 +6,14 @@ services:
         container_name: csgoserver{{ '%02d' % index }}
         environment:
             - GAMESERVER=csgoserver
-            - GAMESERVER_INSTANCE={{ '%02d' % index }}
+            - GAMESERVER_INSTANCE="{{ '%02d' % index }}"
             - LGSM_GITHUBUSER=GameServerManagers
             - LGSM_GITHUBREPO=LinuxGSM
             - LGSM_GITHUBBRANCH=master
         volumes:
-            - {{ csgo_server_path }}/serverfiles:/home/linuxgsm/serverfiles
-            - {{ csgo_server_path }}/log:/home/linuxgsm/log
-            - {{ csgo_server_path }}/config-lgsm:/home/linuxgsm/lgsm/config-lgsm
+            - "{{ csgo_server_path }}/serverfiles:/home/linuxgsm/serverfiles"
+            - "{{ csgo_server_path }}/log:/home/linuxgsm/log"
+            - "{{ csgo_server_path }}/config-lgsm:/home/linuxgsm/lgsm/config-lgsm"
         ports:
             - "270{{ '%02d' % index }}:270{{ '%02d' % index }}/tcp"
             - "270{{ '%02d' % index }}:270{{ '%02d' % index }}/udp"
