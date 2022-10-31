@@ -1,5 +1,5 @@
 - name: Copy docker-compose file
-  copy:
+  template:
     src: templates/docker-compose-initial.yml.j2
     dest: "{{ csgo_server_path }}/docker-compose-initial.yml"
     owner: "{{ csgo_user_name }}"
@@ -23,6 +23,7 @@
   stat:
     path: "{{ csgo_server_path }}/log/script/csgoserver-steamcmd.log"
   register: csgo_initial_install
+  become: true
   
 - name: Report if files are installed
   debug:
