@@ -11,6 +11,7 @@
     project_src: "{{ csgo_server_path }}"
     files: docker-compose-servers.yml
     state: absent
+  become: true
   
 
 - name: pull latest linuxgsm-docker image
@@ -18,7 +19,8 @@
     name: raks321/linuxgsm-docker
     source: pull
     tag: latest
-  
+  become: true
+
 - name: Copy over config-lgsm csgo config files with template
   template:
     src: templates/config-lgsm/csgoserver/csgoserver.cfg.j2
@@ -31,5 +33,6 @@
     project_src: "{{ csgo_server_path }}"
     files: docker-compose-servers.yml
     remove_orphans: yes
+  become: true
 
 

@@ -11,13 +11,13 @@
     project_src: "{{ csgo_server_path }}"
     files: docker-compose-initial.yml
     state: absent
-  
+  become: true
 
 - name: Pull latest raks321/linuxgsm-docker image
   docker_image:
     name: raks321/linuxgsm-docker
     source: pull
-  
+  become: true
 
 - name: Check if initial csgo server files need to be installed
   stat:
@@ -34,6 +34,7 @@
     project_src: "{{ csgo_server_path }}"
     files: docker-compose-initial.yml
   when: not csgo_initial_install.stat.exists
+  become: true
 
 - name: Wait until service has installed or updated (1h timeout with 60s intervals)
   wait_for:
@@ -43,6 +44,7 @@
     sleep: 60
     timeout: 3600
   when: not csgo_initial_install.stat.exists
+  become: true
 
 - name: Tear down existing services
   docker_compose:
@@ -50,3 +52,4 @@
     files: docker-compose-initial.yml
     state: absent
   when: not csgo_initial_install.stat.exists
+  become: true
