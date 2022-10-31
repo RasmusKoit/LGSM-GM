@@ -25,7 +25,7 @@
 
 - name: Create user to manage {{ csgo_user_name }}
   ansible.builtin.user:
-    name: csgouser
+    name: {{ csgo_user_name }}
     comment: Counter Strike Server User
     shell: /bin/bash
     groups: sudo
@@ -34,11 +34,5 @@
     ssh_key_bits: 4096
     ssh_key_file: .ssh/id_rsa
     state: present
-  
 
-- name: Make sure rasmus can interact with other users
-  user:
-    name: rasmus
-    groups: sudo,csgouser,{{ csgo_user_name }}
-    append: yes
   

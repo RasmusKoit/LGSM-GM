@@ -1,6 +1,6 @@
 version: '3.4'
 services:
-{% for index in range(1, 11) %}
+{% for index in range(1, {{ tournament_server_count }} + 1) %}
     csgoserver{{ '%02d' % index }}:
         image: "raks321/linuxgsm-docker:latest"
         container_name: csgoserver{{ '%02d' % index }}

@@ -19,11 +19,16 @@
     source: pull
     tag: latest
   
+- name: Copy over config-lgsm csgo config files with template
+  template:
+    src: templates/config-lgsm/csgoserver/csgoserver.cfg.j2
+    dest: {{ csgo_server_path }}/config-lgsm/csgoserver/csgoserver{{ '%02d' % item }}.cfg
+  loop: "{{ range(1, {{ tournament_server_count }} + 1) }}"
 
 - name: Run CSGO servers
   docker_compose:
     project_src: {{ csgo_server_path }}
     files: docker-compose-servers.yml
     remove_orphans: yes
-  
+
 
