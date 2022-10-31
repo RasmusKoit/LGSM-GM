@@ -1,14 +1,14 @@
 - name: Create docker-compose file for cs go servers
   template:
     src: templates/docker-compose-servers.yml.j2
-    dest: {{ csgo_server_path }}/docker-compose-servers.yml
-    owner: {{ csgo_user_name }}
-    group: {{ csgo_user_name }}
+    dest: "{{ csgo_server_path }}/docker-compose-servers.yml"
+    owner: "{{ csgo_user_name }}"
+    group: "{{ csgo_user_name }}"
   
 
 - name: Tear down existing services
   docker_compose:
-    project_src: {{ csgo_server_path }}
+    project_src: "{{ csgo_server_path }}"
     files: docker-compose-servers.yml
     state: absent
   
@@ -22,12 +22,12 @@
 - name: Copy over config-lgsm csgo config files with template
   template:
     src: templates/config-lgsm/csgoserver/csgoserver.cfg.j2
-    dest: {{ csgo_server_path }}/config-lgsm/csgoserver/csgoserver{{ '%02d' % item }}.cfg
+    dest: "{{ csgo_server_path }}/config-lgsm/csgoserver/csgoserver{{ '%02d' % item }}.cfg"
   loop: "{{ range(1, {{ tournament_server_count }} + 1) }}"
 
 - name: Run CSGO servers
   docker_compose:
-    project_src: {{ csgo_server_path }}
+    project_src: "{{ csgo_server_path }}"
     files: docker-compose-servers.yml
     remove_orphans: yes
 
