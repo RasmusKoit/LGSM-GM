@@ -20,11 +20,23 @@
     tag: latest
   become: true
 
-
 - name: Copy over config-lgsm csgo config files with template
   template:
     src: templates/config-lgsm/csgoserver/csgoserver.cfg.j2
     dest: "{{ csgo_server_path }}/config-lgsm/csgoserver/csgoserver{{ '%02d' % item }}.cfg"
+  loop: "{{ range(1,  tournament_server_count + 1) }}"
+  become: true
+
+- name: Copy over config-lgsm csgo common files with template
+  template:
+    src: templates/config-lgsm/csgoserver/common.cfg.j2
+    dest: "{{ csgo_server_path }}/config-lgsm/csgoserver/common.cfg"
+  become: true
+
+- name: Copy over csgo server config files with template
+  template:
+    src: templates/serverfiles/csgo/cfg/csgoserver.cfg.j2
+    dest: "{{ csgo_server_path }}serverfiles/csgo/cfg/server{{ '%02d' % item }}.cfg"
   loop: "{{ range(1,  tournament_server_count + 1) }}"
   become: true
 
@@ -34,5 +46,3 @@
     files: docker-compose-servers.yml
     remove_orphans: yes
   become: true
-
-

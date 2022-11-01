@@ -8,7 +8,8 @@
 // .................................. Basic ................................. //
 
 // Hostname - Name of the server.
-hostname "LinuxGSM"
+hostname "#{{ '%02d' % item }} {{ tournament_server_name }}"
+
 
 // RCON - remote console password.
 rcon_password "adminMObNtrCt"
