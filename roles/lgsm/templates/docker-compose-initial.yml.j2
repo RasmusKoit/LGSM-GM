@@ -9,9 +9,9 @@ services:
             - LGSM_GITHUBREPO=LinuxGSM
             - LGSM_GITHUBBRANCH=master
         volumes:
-            - "{{ csgo_server_path }}serverfiles:/home/linuxgsm/serverfiles"
-            - "{{ csgo_server_path }}log:/home/linuxgsm/log"
-            - "{{ csgo_server_path }}config-lgsm:/home/linuxgsm/lgsm/config-lgsm"
+            - "{{ csgo_server_path }}/serverfiles:/home/linuxgsm/serverfiles"
+            - "{{ csgo_server_path }}/log:/home/linuxgsm/log"
+            - "{{ csgo_server_path }}/config-lgsm:/home/linuxgsm/lgsm/config-lgsm"
         ports:
             - "27015:27015/tcp"
             - "27015:27015/udp"
