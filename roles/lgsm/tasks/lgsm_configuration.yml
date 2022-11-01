@@ -37,6 +37,7 @@
   template:
     src: templates/serverfiles/csgo/cfg/csgoserver.cfg.j2
     dest: "{{ csgo_server_path }}/serverfiles/csgo/cfg/csgoserver{{ '%02d' % item }}.cfg"
+    mode: 0755
   loop: "{{ range(1,  tournament_server_count + 1) }}"
   become: true
 
