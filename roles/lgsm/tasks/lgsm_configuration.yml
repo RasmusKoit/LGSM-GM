@@ -57,10 +57,10 @@
     mode: 0755
   become: true
   loop:
-    - sourcemod
-    - mmsource
-    - steamworks
-    - get5
+    - "{{ sourcemod | dict2items }}"
+    - "{{ mmsource | dict2items }}"
+    - "{{ steamworks | dict2items }}"
+    - "{{ get5 | dict2items }}"
 
 - name: Run CSGO servers
   docker_compose:
