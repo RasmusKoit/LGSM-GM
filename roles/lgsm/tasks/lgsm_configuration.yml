@@ -50,17 +50,17 @@
     mode: 0755
   become: true
 
-- name: "Download {{ item.name }} {{ item.version }}"
+- name: "Download csgo addons"
   get_url:
     url: "{{ item.url }}"
     dest: "{{ csgo_server_path }}/downloads/{{ item.name }}-{{ item.version }}.tar.gz"
     mode: 0755
-  become: true
   loop:
-    - "{{ sourcemod | dict2items }}"
-    # - "{{ mmsource | dict2items }}"
-    # - "{{ steamworks | dict2items }}"
-    # - "{{ get5 | dict2items }}"
+    - "{{ sourcemod }}"
+    - "{{ mmsource }}"
+    - "{{ steamworks }}"
+    - "{{ get5 }}"
+  become: true
 
 - name: Run CSGO servers
   docker_compose:
