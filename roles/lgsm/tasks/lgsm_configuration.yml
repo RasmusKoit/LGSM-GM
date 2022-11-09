@@ -58,9 +58,9 @@
   become: true
   loop:
     - "{{ sourcemod | dict2items }}"
-    - "{{ mmsource | dict2items }}"
-    - "{{ steamworks | dict2items }}"
-    - "{{ get5 | dict2items }}"
+    # - "{{ mmsource | dict2items }}"
+    # - "{{ steamworks | dict2items }}"
+    # - "{{ get5 | dict2items }}"
 
 - name: Run CSGO servers
   docker_compose:
