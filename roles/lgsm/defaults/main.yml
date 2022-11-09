@@ -6,11 +6,11 @@ sourcemod:
 mmsource:
   name: "mmsource"
   version: "1.11.0-git1148-linux"
-  url: "https://mms.alliedmods.net/mmsdrop/1.11/mmsource-{{ mmsource.version }}.tar.gz"
+  url: "https://mms.alliedmods.net/mmsdrop/1.11/mmsource-{{ version }}.tar.gz"
 steamworks:
   name: "steamworks"
   version: "1.2.3c"
-  url: "https://github.com/KyleSanderson/SteamWorks/releases/download/{{ steamworks.version }}/package-lin.tgz"
+  url: "https://github.com/KyleSanderson/SteamWorks/releases/download/{{ version }}/package-lin.tgz"
 get5:
   name: "get5"
   version: "v0.11.0"
