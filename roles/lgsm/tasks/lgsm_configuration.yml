@@ -41,46 +41,6 @@
   loop: "{{ range(1,  tournament_server_count + 1) }}"
   become: true
 
-- name: Folder for downloaded files
-  file:
-    path: "{{ csgo_server_path }}/downloads"
-    state: directory
-    owner: "{{ csgo_user_name }}"
-    group: "{{ csgo_user_name }}"
-    mode: 0755
-  become: true
-
-- name: Download csgo addons
-  get_url:
-    url: "{{ item.url }}"
-    dest: "{{ csgo_server_path }}/downloads/{{ item.name }}-{{ item.version }}.tar.gz"
-    mode: 0755
-  loop:
-    - "{{ sourcemod }}"
-    - "{{ mmsource }}"
-    - "{{ steamworks }}"
-    - "{{ get5 }}"
-  become: true
-
-- name: Extract csgo addons
-  unarchive:
-    src: "{{ csgo_server_path }}/downloads/{{ item.name }}-{{ item.version }}.tar.gz"
-    dest: "{{ csgo_server_path }}/serverfiles/csgo/addons"
-    remote_src: yes
-    owner: "{{ csgo_user_name }}"
-    group: "{{ csgo_user_name }}"
-    mode: 0755
-  loop:
-    - "{{ sourcemod }}"
-    - "{{ mmsource }}"
-    - "{{ steamworks }}"
-    - "{{ get5 }}"
-  become: true
-
-- name: Move using rsync Steamworks to addons Folder
-  shell: rsync -a "{{ csgo_server_path }}/serverfiles/csgo/addons/package/addons/" "{{ csgo_server_path }}/serverfiles/csgo/addons/"
-  become: true
-
 - name: Run CSGO servers
   docker_compose:
     project_src: "{{ csgo_server_path }}"
