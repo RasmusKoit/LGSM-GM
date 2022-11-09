@@ -77,6 +77,10 @@
     - "{{ get5 }}"
   become: true
 
+- name: Move Steamworks to addons Folder
+  shell: mv "{{ csgo_server_path }}/serverfiles/csgo/addons/package/addons/" "{{ csgo_server_path }}/serverfiles/csgo/addons/"
+  become: true
+
 - name: Run CSGO servers
   docker_compose:
     project_src: "{{ csgo_server_path }}"
