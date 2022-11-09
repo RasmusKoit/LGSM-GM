@@ -19,23 +19,23 @@
     source: pull
   become: true
 
-- name: Check if initial csgo server files need to be installed
-  stat:
-    path: "{{ csgo_server_path }}/log/script/csgoserver-steamcmd.log"
-  register: csgo_initial_install
-  become: true
+# - name: Check if initial csgo server files need to be installed
+#   stat:
+#     path: "{{ csgo_server_path }}/log/script/csgoserver-steamcmd.log"
+#   register: csgo_initial_install
+#   become: true
   
-- name: Report if files are installed
-  debug:
-    msg: "CSGO Initial Server files have been installed"
-  when: csgo_initial_install.stat.exists
+# - name: Report if files are installed
+#   debug:
+#     msg: "CSGO Initial Server files have been installed"
+#   when: csgo_initial_install.stat.exists
 
-- name: Install initial files
-  docker_compose:
-    project_src: "{{ csgo_server_path }}"
-    files: docker-compose-initial.yml
-  when: not csgo_initial_install.stat.exists
-  become: true
+# - name: Install initial files
+#   docker_compose:
+#     project_src: "{{ csgo_server_path }}"
+#     files: docker-compose-initial.yml
+#   when: not csgo_initial_install.stat.exists
+#   become: true
 
 - name: Wait until service has installed or updated (1h timeout with 60s intervals)
   wait_for:
