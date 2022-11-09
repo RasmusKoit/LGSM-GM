@@ -41,6 +41,27 @@
   loop: "{{ range(1,  tournament_server_count + 1) }}"
   become: true
 
+- name: Folder for downloaded files
+  file:
+    path: "{{ csgo_server_path }}/downloads"
+    state: directory
+    owner: "{{ csgo_user_name }}"
+    group: "{{ csgo_user_name }}"
+    mode: 0755
+  become: true
+
+- name: "Download {{ item.name }} {{ item.version }}"
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ csgo_server_path }}/downloads/{{ item.name }}-{{ item.version }}.tar.gz"
+    mode: 0755
+  become: true
+  loop:
+    - sourcemod
+    - mmsource
+    - steamworks
+    - get5
+
 - name: Run CSGO servers
   docker_compose:
     project_src: "{{ csgo_server_path }}"
