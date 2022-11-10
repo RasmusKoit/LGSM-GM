@@ -1,4 +1,4 @@
 ---
 # - include_tasks: lgsm_install.yml
 - include_tasks: lgsm_token_generation.yml
-# - include_tasks: lgsm_configuration.yml
+- include_tasks: lgsm_configuration.yml

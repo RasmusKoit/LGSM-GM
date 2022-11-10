@@ -13,7 +13,7 @@ steamport="273{{ '%02d' % item }}"
 ## Game Server Login Token (GSLT): Required
 # GSLT is required for running a public server.
 # More info: https://docs.linuxgsm.com/steamcmd/gslt
-gslt="{{ lookup('vars', 'gslt_token_csgoserver' + '%02d' % item) }}"
+gslt="{{ csgo_token_exists.results[item - 1].ansible_facts.csgo_token_exists[0].login_token }}"
 
 # Display IP | https://docs.linuxgsm.com/alerts#display-ip
 displayip=""
