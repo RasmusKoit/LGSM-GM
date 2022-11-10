@@ -1,6 +1,6 @@
 - name: Copy docker-compose file
   template:
-    src: templates/docker-compose-initial.yml.j2
+    src: templates/docker-compose/docker-compose-initial.yml.j2
     dest: "{{ csgo_server_path }}/docker-compose-initial.yml"
     owner: "{{ csgo_user_name }}"
     group: "{{ csgo_user_name }}"
@@ -10,6 +10,7 @@
   docker_compose:
     project_src: "{{ csgo_server_path }}"
     files: docker-compose-initial.yml
+    remove_orphans: true
     state: absent
   become: true
 
@@ -51,6 +52,7 @@
   docker_compose:
     project_src: "{{ csgo_server_path }}"
     files: docker-compose-initial.yml
+    remove_orphans: true
     state: absent
   when: not csgo_initial_install.stat.exists
   become: true

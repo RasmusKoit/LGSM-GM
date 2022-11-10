@@ -1,6 +1,6 @@
 - name: Create docker-compose file for cs go servers
   template:
-    src: templates/docker-compose-servers.yml.j2
+    src: templates/docker-compose/docker-compose-servers.yml.j2
     dest: "{{ csgo_server_path }}/docker-compose-servers.yml"
     owner: "{{ csgo_user_name }}"
     group: "{{ csgo_user_name }}"
@@ -52,7 +52,7 @@
 
 - name: Copy over g5 docker-compose file with template
   template:
-    src: templates/docker-compose-g5.yml.j2
+    src: templates/docker-compose/docker-compose-g5.yml.j2
     dest: "{{ csgo_server_path }}/docker-compose-g5.yml"
     owner: "{{ csgo_user_name }}"
     group: "{{ csgo_user_name }}"
