@@ -6,6 +6,50 @@
     return_content: yes
   register: steam_api_token_response
 
-- name: print csgo tokens with debug
+- name: Check if each csgoserver exists in steam api token
+  set_fact:
+    csgo_token_exists: "{{ steam_api_token_response.json.response.servers | selectattr('memo', 'equalto', 'csgoserver%02d' % item) | list  }}"
+  loop: "{{ range(1,  tournament_server_count + 1) }}"
+  register: csgo_token_exists
+
+- name: Print results of csgo_token_exists with debug
   debug:
-    msg: "{{ steam_api_token_response.json.response.tokens }}"
+    msg: "{{ csgo_token_exists.results }}"
+
+- name: Create csgo tokens if they don't exist
+  uri:
+    url: "{{ steam_post_create_account }}&memo=csgoserver{{ '%02d' % item }}"
+    method: POST
+    body_format: json
+    return_content: yes
+  when: csgo_token_exists.results[item - 1].csgo_token_exists | length == 0
+  loop: "{{ range(1,  tournament_server_count + 1) }}"
+  register: csgo_token_create_response
+
+- name: Reset expired csgo tokens when is_expired = true
+  uri:
+    url: "{{ steam_post_reset_token }}&steamid={{ csgo_token_exists.results[item - 1].csgo_token_exists[0].steamid }}"
+    method: POST
+    body_format: json
+    return_content: yes
+  when: csgo_token_exists.results[item - 1].csgo_token_exists[0].is_expired == true
+  loop: "{{ range(1,  tournament_server_count + 1) }}"
+  register: csgo_token_reset_response
+
+- name: Update csgo tokens from Steam API
+  uri:
+    url: "{{ steam_get_account_list_url }}"
+    method: GET
+    body_format: json
+    return_content: yes
+  register: steam_api_token_response
+
+- name: Check if each csgoserver exists in steam api token
+  set_fact:
+    csgo_token_exists: "{{ steam_api_token_response.json.response.servers | selectattr('memo', 'equalto', 'csgoserver%02d' % item) | list  }}"
+  loop: "{{ range(1,  tournament_server_count + 1) }}"
+  register: csgo_token_exists
+
+- name: Print results of csgo_token_exists with debug
+  debug:
+    msg: "{{ csgo_token_exists.results }}"
