@@ -40,12 +40,8 @@
     return_content: yes
   register: steam_api_token_response
 
-- name: Check if each csgoserver exists in steam api token
+- name: Update csgo_tokens_exists if csgo_token_create_response or csgo_token_reset_response was changed
   set_fact:
     csgo_token_exists: "{{ steam_api_token_response.json.response.servers | selectattr('memo', 'equalto', 'csgoserver%02d' % item) | list  }}"
+  when: csgo_token_create_response.results[item - 1].changed == true or csgo_token_reset_response.results[item - 1].changed == true
   loop: "{{ range(1,  tournament_server_count + 1) }}"
-  register: csgo_token_exists
-
-- name: Print results of csgo_token_exists with debug
-  debug:
-    msg: "{{ csgo_token_exists.results }}"
