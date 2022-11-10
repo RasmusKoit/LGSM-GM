@@ -1,0 +1,12 @@
+# Make sure to encrypt this file with ansible-vault
+
+redis_server_password: 
+mysql_root_password: 
+mysql_database: 
+mysql_user: 
+mysql_password:
+g5api_dbkey:
+g5api_steamapikey:
+g5api_sharedsecret:
+caddy_hostname: 
+
