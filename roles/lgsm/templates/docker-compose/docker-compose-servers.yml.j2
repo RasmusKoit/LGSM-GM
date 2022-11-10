@@ -19,6 +19,7 @@ services:
       - "270{{ '%02d' % index }}:270{{ '%02d' % index }}/udp"
       - "271{{ '%02d' % index }}:271{{ '%02d' % index }}/udp"
       - "272{{ '%02d' % index }}:272{{ '%02d' % index }}/udp"
+      - "273{{ '%02d' % index }}:273{{ '%02d' % index }}/udp"
     restart: unless-stopped
 
 {% endfor %}
