@@ -28,7 +28,9 @@
     method: POST
     body_format: json
     return_content: yes
-  when: (csgo_token_exists.results[item - 1].ansible_facts.csgo_token_exists | length != 0) and (csgo_token_exists.results[item - 1].ansible_facts.csgo_token_exists[0].is_expired == true)
+  when: >
+    (csgo_token_exists.results[item - 1].ansible_facts.csgo_token_exists | length != 0) and 
+    (csgo_token_exists.results[item - 1].ansible_facts.csgo_token_exists[0].is_expired == true)
   loop: "{{ range(1,  tournament_server_count + 1) }}"
   register: csgo_token_reset_response
 
