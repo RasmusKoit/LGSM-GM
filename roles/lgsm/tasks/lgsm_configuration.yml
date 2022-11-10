@@ -58,6 +58,12 @@
     group: "{{ csgo_user_name }}"
   become: true
 
+- name: Create bridged docker network named get5
+  docker_network:
+    name: get5
+    driver: bridge
+  become: true
+
 - name: Run CSGO servers
   docker_compose:
     project_src: "{{ csgo_server_path }}"

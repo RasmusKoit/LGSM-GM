@@ -46,8 +46,10 @@ services:
       - get5
     labels:
       caddy: {{ caddy_hostname }}
+      caddy.request_body.max_size: 500MB
       caddy.handle_path: /api/*
-      caddy.handle_path.0_reverse_proxy: "{{upstreams 3301}}"
+      caddy.handle_path.0_reverse_proxy: {% raw %}"{{upstreams 3301}}"{% endraw %}
+
     volumes:
       - ./public:/Get5API/public
     environment:
@@ -65,7 +67,7 @@ services:
       - DATABASE=get5
       - SQLHOST=get5db
       - ADMINS=
-      - SUPERADMINS={{ tournament_server_admins[0] }}
+      - SUPERADMINS={{ tournament_server_admins | join(",") }}
       - REDISURL=redis://:{{ redis_server_password }}@redis:6379
       - REDISTTL=86400
       - USEREDIS=true
@@ -83,7 +85,7 @@ services:
     restart: always
     labels:
       caddy: {{ caddy_hostname }}
-      caddy.reverse_proxy: "{{upstreams}}"
+      caddy.reverse_proxy: {% raw %}"{{upstreams}}"{% endraw %}
 
 networks:
   get5:

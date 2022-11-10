@@ -5,4 +5,4 @@ csgo_server_path: "{{ csgo_user_path }}server"
 # Tournament related information
 tournament_server_name: "tournament"
 tournament_server_count: 8
-tournament_server_admins: ["STEAM_0:0:13510390"]
+tournament_server_admins: ["76561197987286508"]
