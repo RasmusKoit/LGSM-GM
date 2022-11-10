@@ -19,3 +19,7 @@ get5:
   name: "get5"
   version: "{{ get5_version }}"
   url: "https://github.com/splewis/get5/releases/download/{{ get5_version }}/get5-{{ get5_version }}.tar.gz"
+
+# Steam API
+steam_base_uri: "https://api.steampowered.com/IGameServersService"
+steam_get_account_list_url: "{{ steam_base_uri }}/GetAccountList/v1/?key={{ g5api_steamapikey }}"
