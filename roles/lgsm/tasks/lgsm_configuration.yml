@@ -50,14 +50,6 @@
     mode: 0755
   become: true
 
-- name: Copy over g5 docker-compose file with template
-  template:
-    src: templates/docker-compose/docker-compose-g5.yml.j2
-    dest: "{{ csgo_server_path }}/docker-compose-g5.yml"
-    owner: "{{ csgo_user_name }}"
-    group: "{{ csgo_user_name }}"
-  become: true
-
 - name: Create bridged docker network named get5
   docker_network:
     name: get5
