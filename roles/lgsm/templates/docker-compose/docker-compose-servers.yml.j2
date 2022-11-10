@@ -76,7 +76,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3301
-      - DBKEY= {{ g5api_dbkey }}
+      - DBKEY={{ g5api_dbkey }}
       - STEAMAPIKEY={{ g5api_steamapikey }}
       - HOSTNAME=https://{{ caddy_hostname }}
       - SHAREDSECRET={{ g5api_sharedsecret }}
