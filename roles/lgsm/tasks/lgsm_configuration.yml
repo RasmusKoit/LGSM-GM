@@ -43,8 +43,8 @@
 
 - name: Copy over csgo admins_simple.ini config file with template
   template:
-    src: "templates/serverfiles/csgo/cfg/addons/sourcemod/configs/admins_simple.ini.j2"
-    dest: "{{ csgo_server_path }}/serverfiles/csgo/cfg/addons/sourcemod/configs/admins_simple.ini"
+    src: "templates/serverfiles/csgo/addons/sourcemod/configs/admins_simple.ini.j2"
+    dest: "{{ csgo_server_path }}/serverfiles/csgo/addons/sourcemod/configs/admins_simple.ini"
     owner: "{{ csgo_user_name }}"
     group: "{{ csgo_user_name }}"
     mode: 0755
