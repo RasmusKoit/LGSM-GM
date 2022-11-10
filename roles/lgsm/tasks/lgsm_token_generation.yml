@@ -1,0 +1,11 @@
+- name: Get current csgo tokens from Steam API
+  uri:
+    url: "{{ steam_get_account_list_url }}"
+    method: GET
+    body_format: json
+    return_content: yes
+  register: steam_api_token_response
+
+- name: print csgo tokens with debug
+  debug:
+    msg: "{{ steam_api_token_response.json.response.tokens }}"
