@@ -34,14 +34,15 @@
 - name: Install initial files
   docker_compose:
     project_src: "{{ csgo_server_path }}"
+    remove_orphans: true
     files: docker-compose-initial.yml
   when: not csgo_initial_install.stat.exists
   become: true
 
 - name: Wait until service has installed or updated (1h timeout with 60s intervals)
   wait_for:
-    path: "{{ csgo_server_path }}/log/script/csgoserver-steamcmd.log"
-    search_regex: "Success! App '740' already up to date. | Success! App '740' fully installed."
+    path: "{{ csgo_server_path }}/log/script/csgoserver-script.log"
+    search_regex: "Success! App '740' already up to date. | Success! App '740' fully installed. | No update available"
     delay: 30
     sleep: 60
     timeout: 3600
