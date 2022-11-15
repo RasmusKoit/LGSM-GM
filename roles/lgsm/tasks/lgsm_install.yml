@@ -76,6 +76,7 @@
     - "{{ mmsource }}"
     - "{{ steamworks }}"
     - "{{ get5 }}"
+    - "{{ get5ws }}"
   become: true
 
 - name: Extract csgo addons
@@ -91,8 +92,13 @@
     - "{{ mmsource }}"
     - "{{ steamworks }}"
     - "{{ get5 }}"
+    - "{{ get5ws }}"
   become: true
 
 - name: Move using rsync Steamworks to addons Folder
   shell: rsync -a "{{ csgo_server_path }}/serverfiles/csgo/addons/package/addons/" "{{ csgo_server_path }}/serverfiles/csgo/addons/"
+  become: true
+
+- name: Move using rsync get5ws to sourcemod Folder
+  shell: rsync -a "{{ csgo_server_path }}/serverfiles/csgo/addons/G5WS.smx" "{{ csgo_server_path }}/serverfiles/csgo/addons/sourcemod/plugins/G5WS.smx"
   become: true
