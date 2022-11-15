@@ -37,6 +37,8 @@ services:
     restart: always
     networks:
       - get5
+    volumes:
+      - "{{ csgo_server_path }}/database:/var/lib/mysql"
     environment:
       - MYSQL_ROOT_PASSWORD={{ mysql_root_password }}
       - MYSQL_DATABASE={{ mysql_database }}

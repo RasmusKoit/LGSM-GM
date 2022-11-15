@@ -60,5 +60,4 @@
   docker_compose:
     project_src: "{{ csgo_server_path }}"
     files: docker-compose-servers.yml
-    remove_orphans: yes
   become: true

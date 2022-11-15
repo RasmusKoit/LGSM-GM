@@ -10,7 +10,6 @@
   docker_compose:
     project_src: "{{ csgo_server_path }}"
     files: docker-compose-initial.yml
-    remove_orphans: true
     state: absent
   become: true
 
@@ -34,7 +33,6 @@
 - name: Install initial files
   docker_compose:
     project_src: "{{ csgo_server_path }}"
-    remove_orphans: true
     files: docker-compose-initial.yml
   when: not csgo_initial_install.stat.exists
   become: true
@@ -53,7 +51,6 @@
   docker_compose:
     project_src: "{{ csgo_server_path }}"
     files: docker-compose-initial.yml
-    remove_orphans: true
     state: absent
   when: not csgo_initial_install.stat.exists
   become: true
