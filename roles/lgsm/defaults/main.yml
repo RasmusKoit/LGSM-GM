@@ -3,7 +3,7 @@ sourcemod_version: "1.11.0-git6917-linux"
 mmsource_version: "1.11.0-git1148-linux"
 steamworks_version: "1.2.3c"
 get5_version: "v0.11.0"
-get5ws_version: "v4.0.1"
+get5ws_version: "V4.0.1"
 sourcemod:
   name: "sourcemod"
   version: "{{ sourcemod_version }}"
