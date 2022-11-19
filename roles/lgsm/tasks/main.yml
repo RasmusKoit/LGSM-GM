@@ -1,7 +1,9 @@
 ---
 - name: Include LGSM tasks
-  ansible.builtin.include_tasks: "{{ item }}"
+  ansible.builtin.include_tasks: "{{ lgsm_task }}"
   loop:
     - lgsm_install.yml
     - lgsm_token_generation.yml
     - lgsm_configuration.yml
+  loop_control:
+    loop_var: lgsm_task

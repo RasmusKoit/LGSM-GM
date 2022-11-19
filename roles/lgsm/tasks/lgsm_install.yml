@@ -98,12 +98,12 @@
   ansible.posix.synchronize:
     src: "{{ csgo_server_path }}/serverfiles/csgo/addons/package/addons/"
     dest: "{{ csgo_server_path }}/serverfiles/csgo/addons/"
-    mode: pull
+  delegate_to: "{{ inventory_hostname }}"
   become: true
 
 - name: Move using synchronize get5ws to sourcemod Folder
   ansible.posix.synchronize:
     src: "{{ csgo_server_path }}/serverfiles/csgo/addons/G5WS.smx"
     dest: "{{ csgo_server_path }}/serverfiles/csgo/addons/sourcemod/plugins/G5WS.smx"
-    mode: pull
+  delegate_to: "{{ inventory_hostname }}"
   become: true
