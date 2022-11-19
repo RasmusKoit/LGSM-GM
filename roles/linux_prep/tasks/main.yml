@@ -1,9 +1,9 @@
 ---
-- include_tasks: linux_configuration.yml
-  tags: 
+- name: Include Linux preperation tasks
+  ansible.builtin.include_tasks: "{{ item }}"
+  tags:
     - linux_configuration
     - linux_prep
-- include_tasks: linux_dependencies.yml
-  tags: 
-    - linux_dependencies
-    - linux_prep
+  loop:
+    - linux_configuration.yml
+    - linux_dependencies.yml

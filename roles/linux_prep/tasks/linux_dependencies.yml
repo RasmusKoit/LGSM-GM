@@ -1,27 +1,28 @@
-- include_vars: debian.yml
+- name: Include Debian packages
+  ansible.builtin.include_vars: debian.yml
   when: ansible_os_family == "Debian"
 
 - name: Check if i386 is enabled
-  shell: dpkg --print-foreign-architectures | grep i386
+  ansible.builtin.shell: set -o pipefail && dpkg --print-foreign-architectures | grep i386
   register: result_i386_check
   changed_when: result_i386_check.rc == 1
   failed_when: result_i386_check.rc > 1
   when: packaging_enable_i386
 
 - name: Enable i386 architecture
-  command: dpkg --add-architecture i386
+  ansible.builtin.command: dpkg --add-architecture i386
   when: packaging_enable_i386 and result_i386_check.rc == 1
 
 - name: Update all packages
-  apt: force_apt_get=yes
+  ansible.builtin.apt:
+    force_apt_get: true
 
 - name: Install LGSM Debian 11 or above dependencies
-  apt:
+  ansible.builtin.apt:
     name: '{{ item }}'
-    state: latest
+    state: present
   with_items: '{{ debian_packages }}'
   when: ansible_distribution_major_version|int >= 11
-  
 
 - name: Create user to manage {{ csgo_user_name }}
   ansible.builtin.user:
@@ -29,10 +30,8 @@
     comment: Counter Strike Server User
     shell: /bin/bash
     groups: sudo
-    append: yes
-    generate_ssh_key: yes
+    append: true
+    generate_ssh_key: true
     ssh_key_bits: 4096
     ssh_key_file: '.ssh/id_rsa'
     state: present
-
-  

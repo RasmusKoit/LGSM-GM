@@ -1,21 +1,19 @@
 - name: Create partition
-  parted:
+  community.general.system.parted:
     device: /dev/sdb # TODO: change to variable
     number: 1
     state: present
     fs_type: ext4
-  
 
 - name: Get partition UUID
-  command: blkid -s UUID -o value /dev/sdb1 # TODO: change to variable
-  
+  ansible.builtin.command: blkid -s UUID -o value /dev/sdb1 # TODO: change to variable
   register: csgo_part_info
+  when: csgo_part_info is not defined
 
-- name: mount new volumes and create fstab entries
+- name: Mount new volumes and create fstab entries
   ansible.posix.mount:
     path: "{{ csgo_server_path }}"
     src: UUID={{ csgo_part_info.stdout }}
     state: mounted
     fstype: ext4
     opts: defaults,nofail
-  
