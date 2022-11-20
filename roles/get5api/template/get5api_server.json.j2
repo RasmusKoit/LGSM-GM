@@ -1,6 +1,6 @@
 [
   {
-    "ip_string": "{{ hostvars[inventory_hostname]['ansible_env'].SSH_CONNECTION.split(' ')[2] }}",
+    "ip_string": "{{ lookup('community.general.dig', inventory_hostname) }}",
     "port": 270{{ '%02d' % (item | int) }},
     "display_name": "csgoserver{{ '%02d' % item }}",
     "rcon_password": "{{ rcon_password }}",
