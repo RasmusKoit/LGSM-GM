@@ -1,0 +1,31 @@
+---
+- name: Get my seasons from get5api
+  ansible.builtin.uri:
+    url: "{{ get5api_url }}/seasons/myseasons"
+    method: GET
+    return_content: true
+    status_code: 200
+    headers:
+      user-api: "{{ vault_get5api_key }}"
+      Accept: application/json
+  register: get5api_seasons
+
+- name: Get my tournament from challonge
+  ansible.builtin.uri:
+    url: "{{ challonge_url }}/tournaments/{{ tournament_challonge_id }}.json"
+    method: GET
+    return_content: true
+    status_code: 200
+    headers:
+      Accept: application/json
+      Authorization-Type: "v1"
+      Authorization: "{{ vault_challongeapi_key }}"
+  register: challonge_tournament
+
+- name: Print out the challonge tournament
+  ansible.builtin.debug:
+    msg: "{{ challonge_tournament }}"
+
+- name: Print out the get5api seasons
+  ansible.builtin.debug:
+    msg: "{{ get5api_seasons }}"
