@@ -30,10 +30,8 @@
       Cookie: "{{ get5api_key }}"
       Accept: application/json
       Content-Type: application/json
-    body_format: raw
-    body: |
-
-
+    body_format: json
+    body: "{{ lookup('template', 'get5api_server.json.j2') }}"
   when: get5api_server_exists.results[item - 1].ansible_facts.get5api_server_exists | length == 0
   loop: "{{ range(1, tournament_server_count + 1) }}"
   register: get5api_server_create_response
