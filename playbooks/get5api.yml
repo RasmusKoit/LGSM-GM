@@ -1,5 +1,9 @@
 ---
 - name: Get5api playbook
   hosts: CounterStrikeServers
+  vars_prompt:
+    - name: "get5api_key"
+      prompt: "Enter the get5api key from Cookie header"
+      private: false
   roles:
     - ../roles/get5api
