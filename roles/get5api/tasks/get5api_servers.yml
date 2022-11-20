@@ -16,6 +16,10 @@
   loop: "{{ range(1, tournament_server_count + 1) }}"
   register: get5api_server_exists
 
+- name: Print out myservers
+  ansible.builtin.debug:
+    msg: "{{ get5api_server_exists }}"
+
 - name: Create csgo servers if they don't exist
   ansible.builtin.uri:
     url: "{{ get5api_url }}/servers"
@@ -26,18 +30,12 @@
       Cookie: "{{ get5api_key }}"
       Accept: application/json
       Content-Type: application/json
+    body_format: raw
     body: |
-      [
-        {
-          "ip_string": "{{ hostvars[inventory_hostname]['ansible_env'].SSH_CONNECTION.split(' ')[2] }}",
-          "port": 270{{ '%02' % item }},
-          "display_name": "csgoserver{{ '%02d' % item }}",
-          "rcon_password": "{{ rcon_password }}",
-          "public_server": true,
-          "flag": "EE",
-          "gotv_port": 272{{ '%02' % item }}
-        }
-      ]
-    when: get5api_server_exists.results[item - 1].get5api_server_exists | length == 0
-    loop: "{{ range(1, tournament_server_count + 1) }}"
-    register: get5api_server_create_response
+
+
+  when: get5api_server_exists.results[item - 1].ansible_facts.get5api_server_exists | length == 0
+  loop: "{{ range(1, tournament_server_count + 1) }}"
+  register: get5api_server_create_response
+
+# G5API=s:yhcLZvooagxZEuRGWznGYE-bB25r8daj.6rroC2eumbqG/n/nKB72CH0QfEgCCPhi+d0E5c5NJA0
