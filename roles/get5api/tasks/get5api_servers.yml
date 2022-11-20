@@ -1,0 +1,11 @@
+---
+- name: Get my servers list from get5api
+  ansible.builtin.uri:
+    url: "{{ get5api_url }}/servers/myservers"
+    method: GET
+    return_content: true
+    status_code: 200
+    headers:
+      Cookie: "{{ get5api_cookie }}"
+      Accept: application/json
+  register: get5api_servers
