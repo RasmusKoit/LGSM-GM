@@ -12,7 +12,7 @@ hostname "#{{ '%02d' % item }} {{ tournament_server_name }}"
 
 
 // RCON - remote console password.
-rcon_password "adminMObNtrCt"
+rcon_password "{{ rcon_password }}"
 
 // Server password - for private servers.
 sv_password ""
