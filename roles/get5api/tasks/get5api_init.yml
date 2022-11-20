@@ -1,0 +1,7 @@
+---
+- name: Prompt user for get5api key from Cookie header
+  prompt:
+    private: false
+    prompt: "Enter your get5api key from Cookie header ex: G5API=s:yhcLZvooagxZEuRGWznGYE-bB25r8daj.6rroC2eumbqG/n/nKB72CH0QfEgCCPhi+d0E5c5NJA0"
+    echo: true
+  register: get5api_key

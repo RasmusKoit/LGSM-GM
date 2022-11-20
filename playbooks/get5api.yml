@@ -1,0 +1,5 @@
+---
+- name: Get5api playbook
+  hosts: CounterStrikeServers
+  roles:
+    - ../roles/get5api

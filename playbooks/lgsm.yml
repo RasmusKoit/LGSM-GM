@@ -1,3 +1,5 @@
-- hosts: CounterStrikeServers
+---
+- name: LGSM playbook
+  hosts: CounterStrikeServers
   roles:
     - ../roles/lgsm

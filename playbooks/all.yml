@@ -1,6 +1,13 @@
-- import_playbook: linux_prep.yml
-  tags: 
+---
+- name: Execute linux prep playbook
+  ansible.builtin.import_playbook: linux_prep.yml
+  tags:
     - linux_prep
     - linux_configuration
     - linux_dependencies
-- import_playbook: lgsm.yml
+
+- name: Execute LGSM playbook
+  ansible.builtin.import_playbook: lgsm.yml
+
+- name: Execute get5api playbook
+  ansible.builtin.import_playbook: get5api.yml
