@@ -25,7 +25,7 @@ services:
 {% endfor %}
   redis:
     image: redis:6
-    command: redis-server --requirepass {{ redis_server_password }}
+    command: redis-server --requirepass {{ vault_redis_server_password }}
     container_name: redis
     networks:
     - get5
@@ -40,10 +40,10 @@ services:
     volumes:
       - "{{ csgo_server_path }}/database:/var/lib/mysql"
     environment:
-      - MYSQL_ROOT_PASSWORD={{ mysql_root_password }}
-      - MYSQL_DATABASE={{ mysql_database }}
-      - MYSQL_USER={{ mysql_user }}
-      - MYSQL_PASSWORD={{ mysql_password }}
+      - MYSQL_ROOT_PASSWORD={{ vault_mysql_root_password }}
+      - MYSQL_DATABASE={{ vault_mysql_database }}
+      - MYSQL_USER={{ vault_mysql_user }}
+      - MYSQL_PASSWORD={{ vault_mysql_password }}
       - MYSQL_CHARSET=utf8mb4
       - MYSQL_COLLATION=utf8mb4_general_ci
 
@@ -69,7 +69,7 @@ services:
     networks:
       - get5
     labels:
-      caddy: {{ caddy_hostname }}
+      caddy: {{ vault_caddy_hostname }}
       caddy.handle_path: /api/*
       caddy.handle_path.0_reverse_proxy: {% raw %}"{{upstreams 3301}}"{% endraw %}
 
@@ -78,20 +78,20 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3301
-      - DBKEY={{ g5api_dbkey }}
-      - STEAMAPIKEY={{ g5api_steamapikey }}
-      - HOSTNAME=https://{{ caddy_hostname }}
-      - SHAREDSECRET={{ g5api_sharedsecret }}
-      - CLIENTHOME=https://{{ caddy_hostname }}
-      - APIURL=https://{{ caddy_hostname }}/api
-      - SQLUSER={{ mysql_user }}
-      - SQLPASSWORD={{ mysql_password }}
+      - DBKEY={{ vault_g5api_dbkey }}
+      - STEAMAPIKEY={{ vault_g5api_steamapikey }}
+      - HOSTNAME=https://{{ vault_caddy_hostname }}
+      - SHAREDSECRET={{ vault_g5api_sharedsecret }}
+      - CLIENTHOME=https://{{ vault_caddy_hostname }}
+      - APIURL=https://{{ vault_caddy_hostname }}/api
+      - SQLUSER={{ vault_mysql_user }}
+      - SQLPASSWORD={{ vault_mysql_password }}
       - SQLPORT=3306
       - DATABASE=get5
       - SQLHOST=get5db
       - ADMINS=
       - SUPERADMINS={{ tournament_server_admins | join(",") }}
-      - REDISURL=redis://:{{ redis_server_password }}@redis:6379
+      - REDISURL=redis://:{{ vault_redis_server_password }}@redis:6379
       - REDISTTL=86400
       - USEREDIS=true
       - UPLOADDEMOS=true
@@ -107,7 +107,7 @@ services:
       - get5
     restart: always
     labels:
-      caddy: {{ caddy_hostname }}
+      caddy: {{ vault_caddy_hostname }}
       caddy.reverse_proxy: {% raw %}"{{upstreams}}"{% endraw %}
 
 networks:

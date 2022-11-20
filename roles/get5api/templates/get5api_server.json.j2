@@ -3,7 +3,7 @@
     "ip_string": "{{ lookup('community.general.dig', inventory_hostname) }}",
     "port": 270{{ '%02d' % (item | int) }},
     "display_name": "csgoserver{{ '%02d' % item }}",
-    "rcon_password": "{{ rcon_password }}",
+    "rcon_password": "{{ vault_rcon_password }}",
     "public_server": true,
     "flag": "EE",
     "gotv_port": 272{{ '%02d' % (item | int) }}

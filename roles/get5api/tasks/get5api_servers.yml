@@ -6,7 +6,7 @@
     return_content: true
     status_code: 200
     headers:
-      user-api: "{{ get5api_key }}"
+      user-api: "{{ vault_get5api_key }}"
       Accept: application/json
   register: get5api_servers
 
@@ -23,7 +23,7 @@
     return_content: true
     status_code: 200
     headers:
-      user-api: "{{ get5api_key }}"
+      user-api: "{{ vault_get5api_key }}"
       Accept: application/json
       Content-Type: application/json
     body_format: json
