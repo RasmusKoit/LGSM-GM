@@ -1,4 +1,0 @@
----
-- name: Print out get5api_key
-  ansible.builtin.debug:
-    msg: "get5api_key: {{ get5api_key }}"

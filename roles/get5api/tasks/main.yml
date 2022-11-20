@@ -2,7 +2,6 @@
 - name: Include get5api tasks
   ansible.builtin.include_tasks: "{{ get5api_task }}"
   loop:
-    - get5api_init.yml
     - get5api_servers.yml
     - get5api_tournament.yml
   loop_control:
