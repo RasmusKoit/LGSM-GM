@@ -18,14 +18,16 @@
     status_code: 200
     headers:
       Accept: application/json
-      Authorization-Type: "v1"
+      Authorization-Type: v1
       Authorization: "{{ vault_challongeapi_key }}"
+      Content-Type: application/vnd.api+json
   register: challonge_tournament
 
-- name: Print out the challonge tournament
-  ansible.builtin.debug:
-    msg: "{{ challonge_tournament }}"
+- name: Check if tournament is already in get5api
+  ansible.builtin.set_fact:
+    tournament_exists: "{{ get5api_seasons.json.seasons | selectattr('name', 'equalto', challonge_tournament.json.data.attributes.name) }}"
+  register: tournament_exists
 
-- name: Print out the get5api seasons
+- name: Print out the tournament_exists variable
   ansible.builtin.debug:
-    msg: "{{ get5api_seasons }}"
+    msg: "{{ tournament_exists }}"
