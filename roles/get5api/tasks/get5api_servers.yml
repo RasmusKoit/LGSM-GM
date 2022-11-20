@@ -38,3 +38,6 @@
           "gotv_port": 272{{ '%02' % item }}
         }
       ]
+    when: get5api_server_exists.results[item - 1].get5api_server_exists | length == 0
+    loop: "{{ range(1, tournament_server_count + 1) }}"
+    register: get5api_server_create_response
