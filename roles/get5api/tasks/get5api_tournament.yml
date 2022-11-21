@@ -27,7 +27,9 @@
 
 - name: Check if tournament is already in get5api
   ansible.builtin.set_fact:
-    tournament_exists: "{{ get5api_seasons.json.seasons | selectattr('name', 'equalto', challonge_tournament.json.data.attributes.name) }}"
+    tournament_exists: >
+      "{{ get5api_seasons.status != 404 and get5api_seasons.json.seasons
+      | selectattr('name', 'equalto', challonge_tournament.json.data.attributes.name) }}"
   register: tournament_exists
 
 - name: Import tournament from Challonge to get5api if tournament doesn't exist
