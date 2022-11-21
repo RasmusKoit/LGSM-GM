@@ -30,11 +30,15 @@
 
 - name: Check if teams exists in get5api_teams
   ansible.builtin.set_fact:
-    get5api_team_exists: "{{ get5api_teams.json.teams | selectattr('name', 'equalto', cs.team_name) | list }}"
+    get5api_team_exists: "{{ get5api_teams.status != 404 and get5api_teams.json.teams | selectattr('name', 'equalto', cs.team_name) | list }}"
   loop: "{{ csgo_teams }}"
   loop_control:
     loop_var: cs
   register: get5api_team_exists
+
+- name: print out get5api_team_exists
+  ansible.builtin.debug:
+    msg: "{{ get5api_team_exists.results }}"
 
 - name: Create teams in get5api if they don't exist
   ansible.builtin.uri:
@@ -49,7 +53,7 @@
     body_format: json
     body: "{{ lookup('template', 'get5api_team.json.j2') }}"
   when: >
-    (get5api_team_exists.results[csgo_idx].ansible_facts.get5api_team_exists | length == 0) and
+    (not get5api_team_exists.results[csgo_idx].ansible_facts.get5api_team_exists) and
     (get5api_team_exists.results[csgo_idx].cs.team_name == item.team_name)
   loop: "{{ csgo_teams | list }}"
   loop_control:
