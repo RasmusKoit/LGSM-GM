@@ -30,12 +30,14 @@
         "name": "",
         "captain": 0,
         "coach": 0
-      },
-      "{{ item.participant6 }}": {
+      }
+      {% if '' != item.participant6 %}
+      ,"{{ item.participant6 }}": {
         "name": "",
         "captain": 0,
         "coach": 1
       }
+      {% endif %}
     }
   }
 ]
