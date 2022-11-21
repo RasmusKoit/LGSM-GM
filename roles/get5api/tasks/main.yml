@@ -4,5 +4,6 @@
   loop:
     - get5api_servers.yml
     - get5api_tournament.yml
+    - get5api_teams.yml
   loop_control:
     loop_var: get5api_task

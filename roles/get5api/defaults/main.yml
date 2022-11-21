@@ -1,2 +1,3 @@
 get5api_url: "https://lgsm-dev.norwayeast.cloudapp.azure.com/api"
 challonge_url: "https://api.challonge.com/v2"
+csv_file: "{{ tournament_challonge_id }}.csv"

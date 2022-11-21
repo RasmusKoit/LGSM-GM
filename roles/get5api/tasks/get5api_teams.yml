@@ -1,0 +1,22 @@
+---
+- name: Get my teams list from get5api
+  ansible.builtin.uri:
+    url: "{{ get5api_url }}/teams/myteams"
+    method: GET
+    return_content: true
+    status_code: 200
+    headers:
+      user-api: "{{ vault_get5api_key }}"
+      Accept: application/json
+  register: get5api_teams
+
+- name: Get my tournament participant list from CSV file
+  ansible.builtin.csvfile:
+    path: "{{ csv_file }}"
+    delimiter: ","
+    fieldnames: ["seed", "team_name", "participant1", "participant2", "participant3", "participant4", "participant5", "participant6"]
+  register: csv_teams
+
+- name: Print out csv_teams
+  ansible.builtin.debug:
+    msg: "{{ csv_teams }}"
