@@ -9,7 +9,6 @@
       user-api: "{{ vault_get5api_key }}"
       Accept: application/json
   register: get5api_seasons
-  when: (tournament_exists is not defined) or (tournament_exists.ansible_facts.tournament_exists | length == 0)
 
 - name: Get my tournament from challonge
   ansible.builtin.uri:
@@ -23,7 +22,6 @@
       Authorization: "{{ vault_challongeapi_key }}"
       Content-Type: application/vnd.api+json
   register: challonge_tournament
-  when: (tournament_exists is not defined) or (tournament_exists.ansible_facts.tournament_exists | length == 0)
 
 - name: Check if tournament is already in get5api
   ansible.builtin.set_fact:
