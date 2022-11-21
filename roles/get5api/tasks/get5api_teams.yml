@@ -4,14 +4,14 @@
     url: "{{ get5api_url }}/teams/myteams"
     method: GET
     return_content: true
-    status_code: 200
+    status_code: [200, 404]
     headers:
       user-api: "{{ vault_get5api_key }}"
       Accept: application/json
   register: get5api_teams
 
 - name: Get my tournament participant list from CSV file
-  ansible.builtin.csvfile:
+  community.general.files.read_csv:
     path: "{{ csv_file }}"
     delimiter: ","
     fieldnames: ["seed", "team_name", "participant1", "participant2", "participant3", "participant4", "participant5", "participant6"]
