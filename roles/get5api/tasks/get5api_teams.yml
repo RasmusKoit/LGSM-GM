@@ -36,10 +36,6 @@
     loop_var: cs
   register: get5api_team_exists
 
-- name: print out get5api_team_exists
-  ansible.builtin.debug:
-    msg: "{{ get5api_team_exists.results }}"
-
 - name: Create teams in get5api if they don't exist
   ansible.builtin.uri:
     url: "{{ get5api_url }}/teams"
