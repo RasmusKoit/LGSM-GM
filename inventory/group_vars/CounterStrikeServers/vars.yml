@@ -7,3 +7,4 @@ tournament_challonge_id: "8eoo46bj"
 tournament_server_name: "tournament"
 tournament_server_count: 8
 tournament_server_admins: ["76561197987286508"]
+tournament_default_flag: "EE"
