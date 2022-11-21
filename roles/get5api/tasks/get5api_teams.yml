@@ -10,13 +10,33 @@
       Accept: application/json
   register: get5api_teams
 
+- name: Check if participant file list has changed
+  ansible.builtin.stat:
+    path: "{{ csv_file }}"
+  register: csv_file_stat
+  delegate_to: localhost
+
+- name: Print out csv_file_stat
+  ansible.builtin.debug:
+    msg: "{{ csv_file_stat }}"
+
 - name: Get my tournament participant list from CSV file
   community.general.files.read_csv:
     path: "{{ csv_file }}"
     delimiter: ","
     fieldnames: ["seed", "team_name", "participant1", "participant2", "participant3", "participant4", "participant5", "participant6"]
-  register: csv_teams
+    key: "seed"
+  register: csv_teams_results
+  delegate_to: localhost
+  # When csv_file_stat has changed
+
+- name: Manipulate the list to remove headers
+  ansible.builtin.set_fact:
+    csgo_teams: "{{ {} | combine(item.key: item.value) }}"
+  loop: "{{ csv_teams_results.dict | dict2items }}"
+  when: (item.key not in ['Seed '])
+  # when: csv_file_stat.stat.exists
 
 - name: Print out csv_teams
   ansible.builtin.debug:
-    msg: "{{ csv_teams }}"
+    msg: "{{ csgo_teams }}"

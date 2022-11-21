@@ -4,7 +4,7 @@
     url: "{{ get5api_url }}/seasons/myseasons"
     method: GET
     return_content: true
-    status_code: 200
+    status_code: [200, 404]
     headers:
       user-api: "{{ vault_get5api_key }}"
       Accept: application/json
