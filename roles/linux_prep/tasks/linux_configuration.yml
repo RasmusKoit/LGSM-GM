@@ -4,11 +4,14 @@
     number: 1
     state: present
     fs_type: ext4
+  when: csgo_part_info is not defined
+  become: true
 
 - name: Get partition UUID
   ansible.builtin.command: blkid -s UUID -o value /dev/sdb1 # TODO: change to variable
   register: csgo_part_info
   when: csgo_part_info is not defined
+  become: true
 
 - name: Mount new volumes and create fstab entries
   ansible.posix.mount:
@@ -17,3 +20,4 @@
     state: mounted
     fstype: ext4
     opts: defaults,nofail
+  become: true

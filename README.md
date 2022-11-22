@@ -25,6 +25,7 @@ Copy over the files from `setup` folder to correct places indicated in the first
 
 Configure settings for the tournament under `inventory/group_vars/CounterStrikeServers/vars.yml`
 
+Export the tournament list from Challonge and save it under `roles/get5api/files/<challonge_tournament_id>.csv`
 
 
 ## First run
