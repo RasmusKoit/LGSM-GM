@@ -1,0 +1,9 @@
+[all:vars]
+ansible_user='csgoserver' # Change this to main username you use
+ansible_become_method=sudo
+ansible_python_interpreter='/usr/bin/env python3'
+become=true
+
+[CounterStrikeServers]
+fqdn.tld # List of domain names where you would like to deploy
+

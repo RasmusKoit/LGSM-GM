@@ -1,0 +1,15 @@
+# inventory/groups_vars/CounterStrikeServers/vault.yml
+# Make sure to encrypt this file with ansible-vault
+
+vault_redis_server_password: <string>
+vault_mysql_root_password: <string>
+vault_mysql_database: <string>
+vault_mysql_user: <string>
+vault_mysql_password: <string>
+vault_g5api_dbkey: <16_byte_string> # remove spaces https://www.random.org/bytes/
+vault_g5api_steamapikey: <string> # https://steamcommunity.com/dev/apikey
+vault_g5api_sharedsecret: <string>
+vault_caddy_hostname: <my.fqdn.tld>
+vault_rcon_password: <string>
+vault_get5api_key: <string>
+vault_challongeapi_key: <string> # Get the V1 key from https://challonge.com/settings/developer
