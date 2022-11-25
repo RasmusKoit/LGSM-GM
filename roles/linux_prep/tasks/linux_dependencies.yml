@@ -3,7 +3,11 @@
   when: ansible_os_family == "Debian"
 
 - name: Check if i386 is enabled
-  ansible.builtin.shell: set -o pipefail && dpkg --print-foreign-architectures | grep i386
+  ansible.builtin.shell: |
+    set -o pipefail
+    dpkg --print-foreign-architectures | grep i386
+  args:
+    executable: /bin/bash
   register: result_i386_check
   changed_when: result_i386_check.rc == 1
   failed_when: result_i386_check.rc > 1
@@ -19,9 +23,11 @@
 
 - name: Install LGSM Debian 11 or above dependencies
   ansible.builtin.apt:
-    name: '{{ item }}'
+    name: '{{ package }}'
     state: present
-  with_items: '{{ debian_packages }}'
+  loop: '{{ debian_packages }}'
+  loop_control:
+    loop_var: package
   when: ansible_distribution_major_version|int >= 11
 
 - name: Create user to manage {{ csgo_user_name }}
@@ -35,3 +41,4 @@
     ssh_key_bits: 4096
     ssh_key_file: '.ssh/id_rsa'
     state: present
+  become: true
