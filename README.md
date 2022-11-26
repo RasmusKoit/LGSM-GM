@@ -18,15 +18,24 @@ cd LGSM-GM/
 ## Setup
 
 Requirements:
-* Ansible => 2.10.8
+* Ansible => 2.13.6
 * Python3 => 3.9.2
 
 Copy over the files from `setup` folder to correct places indicated in the first line of each file.
+Alternatively you can use the `setup.sh` script to do this for you. (NOTE: This script expects to be ran from the `setup` folder using `bash`)
+
+```bash
+cd setup/
+./setup.sh
+```
 
 Configure settings for the tournament under `inventory/group_vars/CounterStrikeServers/vars.yml`
 
 Export the tournament list from Challonge and save it under `roles/get5api/files/<challonge_tournament_id>.csv`
 
+Get Steam API key from [here](https://steamcommunity.com/dev/apikey) and add it to `inventory/group_vars/CounterStrikeServers/vault.yml` 
+
+Get Challonge API key from [here](https://challonge.com/settings/developer) and add it to `inventory/group_vars/CounterStrikeServers/vault.yml`
 
 ## First run
 
