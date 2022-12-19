@@ -1,4 +1,6 @@
-# LGSM-GM
+![LGSM](https://user-images.githubusercontent.com/29210664/208509402-ddc13e09-be91-40b7-aa7f-9a701a482c67.png)
+
+<h1 align="center">Linux Gameserver Manager Gamemaster</h1>
 
 Automatically generate XX number of Counter Strike: Global Offensive servers and manage them. 
 
