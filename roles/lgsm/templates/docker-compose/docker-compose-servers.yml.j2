@@ -14,12 +14,14 @@ services:
       - "{{ csgo_server_path }}/serverfiles:/home/linuxgsm/serverfiles"
       - "{{ csgo_server_path }}/log:/home/linuxgsm/log"
       - "{{ csgo_server_path }}/config-lgsm:/home/linuxgsm/lgsm/config-lgsm"
+      - "{{ csgo_server_path }}/lgsm/mods:/home/linuxgsm/lgsm/mods"
     ports:
-      - "270{{ '%02d' % index }}:270{{ '%02d' % index }}/tcp"
-      - "270{{ '%02d' % index }}:270{{ '%02d' % index }}/udp"
-      - "271{{ '%02d' % index }}:271{{ '%02d' % index }}/udp"
-      - "272{{ '%02d' % index }}:272{{ '%02d' % index }}/udp"
-      - "273{{ '%02d' % index }}:273{{ '%02d' % index }}/udp"
+      - "270{{ '%02d' % index }}:270{{ '%02d' % index }}/tcp" # game
+      - "270{{ '%02d' % index }}:270{{ '%02d' % index }}/udp" # game
+      - "271{{ '%02d' % index }}:271{{ '%02d' % index }}/udp" # client
+      - "272{{ '%02d' % index }}:272{{ '%02d' % index }}/udp" # gotv 0
+      - "273{{ '%02d' % index }}:273{{ '%02d' % index }}/udp" # steam port
+      - "274{{ '%02d' % index }}:274{{ '%02d' % index }}/udp" # gotv 1
     restart: unless-stopped
 
 {% endfor %}

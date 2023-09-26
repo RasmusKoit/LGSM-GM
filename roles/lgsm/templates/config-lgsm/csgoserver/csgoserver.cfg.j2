@@ -9,6 +9,7 @@ port="270{{ '%02d' % item }}"
 clientport="271{{ '%02d' % item }}"
 sourcetvport="272{{ '%02d' % item }}"
 steamport="273{{ '%02d' % item }}"
+sourcetvport1="274{{ '%02d' % item }}"
 
 ## Game Server Login Token (GSLT): Required
 # GSLT is required for running a public server.
@@ -17,3 +18,5 @@ gslt="{{ csgo_token_exists.results[item - 1].ansible_facts.csgo_token_exists[0].
 
 # Display IP | https://docs.linuxgsm.com/alerts#display-ip
 displayip=""
+
+startparameters="-game csgo -usercon -strictportbind -ip ${ip} -port ${port} +clientport ${clientport} +tv_port ${sourcetvport} +tv_port1 ${sourcetvport1} +sv_setsteamaccount ${gslt} -tickrate ${tickrate} +map ${defaultmap} +servercfgfile ${servercfg} -maxplayers_override ${maxplayers} +mapgroup ${mapgroup} +game_type ${gametype} +game_mode ${gamemode} +sv_game_mode_flags ${gamemodeflags} +sv_skirmish_id ${skirmishid} +host_workshop_collection ${wscollectionid} +workshop_start_map ${wsstartmap} -authkey ${wsapikey} -nobreakpad -addhltv1"

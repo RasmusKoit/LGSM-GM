@@ -1,0 +1,32 @@
+sv_hibernate_postgame_delay 180
+
+tv_allow_camera_man 1           // Auto director allows spectators to become camera man
+tv_allow_static_shots 1         // Auto director uses fixed level cameras for shots
+tv_autorecord 1                 // Automatically records all games as GOTV demos.
+tv_chatgroupsize 0              // Set the default chat group size
+tv_chattimelimit 8              // Limits spectators to chat only every n seconds
+tv_debug 0                      // GOTV debug info.
+tv_delay 0                      // GOTV broadcast delay in seconds
+tv_deltacache 2                 // Enable delta entity bit stream cache
+tv_dispatchmode 1               // Dispatch clients to relay proxies: 0=never, 1=if appropriate, 2=always
+tv_enable 1                     // Activates GOTV on server.
+tv_maxclients 10                // Maximum client number on GOTV server.
+tv_maxrate 0                    // Max GOTV spectator bandwidth rate allowed, 0 == unlimited
+tv_name "#{{ '%02d' % item }} {{ tournament_server_name }} - GOTV"     // GOTV host name
+tv_overridemaster 0             // Overrides the GOTV master root address.
+tv_port 272{{ '%02d' % item }}                   // Host SourceTV port
+tv_relaypassword {{ vault_rcon_password }}      // GOTV password for relay proxies
+tv_password {{ vault_rcon_password }}           // GOTV password
+tv_relayvoice 0                 // Relay voice data: 0=off, 1=on
+tv_snapshotrate 24              // Snapshots broadcasted per second
+tv_timeout 60                   // GOTV connection timeout in seconds.
+tv_title "#{{ '%02d' % item }} {{ tournament_server_name }} - GOTV"    // Set title for GOTV spectator UI
+tv_transmitall 1                // Transmit all entities (not only director view)
+
+say "GOTV 0 Loaded"
+
+tv_enable1 1                    // Activates GOTV1 on server
+tv_delay1 7                     // Adds delay of 7 seconds on GOTV1
+tv_port1 274{{ '%02d' % item }}                  // Sets port on GOTV1
+
+say "GOTV 1 Loaded"

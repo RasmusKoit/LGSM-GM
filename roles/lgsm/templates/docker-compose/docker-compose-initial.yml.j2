@@ -12,9 +12,11 @@ services:
             - "{{ csgo_server_path }}/serverfiles:/home/linuxgsm/serverfiles"
             - "{{ csgo_server_path }}/log:/home/linuxgsm/log"
             - "{{ csgo_server_path }}/config-lgsm:/home/linuxgsm/lgsm/config-lgsm"
+            - "{{ csgo_server_path }}/lgsm/mods:/home/linuxgsm/lgsm/mods"
         ports:
             - "27015:27015/tcp"
             - "27015:27015/udp"
             - "27020:27020/udp"
+            - "27021:27021/udp"
             - "27005:27005/udp"
         restart: unless-stopped

@@ -65,6 +65,33 @@
     mode: 0755
   become: true
 
+- name: Folder for csgo addons
+  ansible.builtin.file:
+    path: "{{ csgo_server_path }}/serverfiles/csgo/addons"
+    state: directory
+    owner: "{{ csgo_user_name }}"
+    group: "{{ csgo_user_name }}"
+    mode: 0755
+  become: true
+
+- name: Folder for sourcemod plugins
+  ansible.builtin.file:
+    path: "{{ csgo_server_path }}/serverfiles/csgo/addons/sourcemod/plugins"
+    state: directory
+    owner: "{{ csgo_user_name }}"
+    group: "{{ csgo_user_name }}"
+    mode: 0755
+  become: true
+
+- name: Folder for sourcemod configs
+  ansible.builtin.file:
+    path: "{{ csgo_server_path }}/serverfiles/csgo/addons/sourcemod/configs"
+    state: directory
+    owner: "{{ csgo_user_name }}"
+    group: "{{ csgo_user_name }}"
+    mode: 0755
+  become: true
+
 - name: Download csgo addons
   ansible.builtin.get_url:
     url: "{{ item.url }}"
